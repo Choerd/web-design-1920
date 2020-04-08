@@ -1,0 +1,10 @@
+@import './base/_base.scss';
+@import './layout/_layout.scss';
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: $main-color;
+}
