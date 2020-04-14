@@ -1,3 +1,28 @@
 <section>
-    <p>Home</p>
+
+    <p>Day: <%= data[0].day %></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th tabindex="0">Country</th>
+                <th tabindex="0">Total</th>
+                <th tabindex="0">Deaths</th>
+                <th tabindex="0">New</th>
+                <th tabindex="0">Critical</th>
+                <th tabindex="0">Recoverd</th>
+            </tr>
+        </thead>
+
+        <% data.forEach(entry => { %>
+        <tr>
+            <td tabindex="0"><%= entry.country %></td>
+            <td tabindex="0"><%= entry.cases.total %></td>
+            <td tabindex="0"><%= entry.deaths.total %></td>
+            <td tabindex="0"><%= entry.cases.new %></td>
+            <td tabindex="0"><%= entry.cases.critical %></td>
+            <td tabindex="0"><%= entry.cases.recovered %></td>
+        </tr>
+        <% }) %>
+    </table>
 </section>

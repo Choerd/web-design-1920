@@ -7,4 +7,24 @@ html, body {
 
 body {
     background: $main-color;
+    color: $font-color;
+    @include font($font-medium, 500, 20px);
+}
+
+table {
+    border: 2px solid $base-color;
+    margin: auto;
+
+    thead {
+        border-bottom: 2px solid $base-color;
+    }
+
+    td, th {
+        padding: 8px 16px;
+        border-right: 2px solid $base-color;
+    }
+
+    tr td:first-of-type {
+        text-align: right;
+    }
 }
