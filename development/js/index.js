@@ -2,20 +2,14 @@ import * as module from './modules/module'
 
 const synth = window.speechSynthesis
 
-console.log('Javascript is working - index.js')
-console.log(module.test)
-
-
-// const body = document.querySelector('body')
-// body.addEventListener('click', () => {
-//     speak('Hi, Sjors hier!')
-// })
-
 const table = document.querySelector('table')
 const thead = table.querySelector('thead tr')
 const tbody = table.querySelector('tbody')
 
-console.log(tbody.children[0].children[0])
+const intro = document.querySelector('section > p')
+intro.addEventListener('focus', () => {
+    speak('Deze website is gemaakt met een custom screen reader. Op dit moment kun je voor de optimale ervaring je screen reader uitzetten en door tabben naar de volgende sectie.')
+})
 
 thead.children[0].addEventListener('focus', () => {
     speak('In deze kolom vind je alle landen')
@@ -46,23 +40,23 @@ tbody.children[0].children[0].addEventListener('focus', () => {
 })
 
 tbody.children[0].children[1].addEventListener('focus', () => {
-    speak('In China zijn er totaal 82249 besmet')
+    speak('In China zijn er totaal 82295 besmet')
 })
 
 tbody.children[0].children[2].addEventListener('focus', () => {
-    speak('In China zijn er totaal 3341 mensen overleden')
+    speak('In China zijn er totaal 3342 mensen overleden')
 })
 
 tbody.children[0].children[3].addEventListener('focus', () => {
-    speak('In China zijn er vandaag 89 nieuwe besmettingen')
+    speak('In China zijn er vandaag 46 nieuwe besmettingen')
 })
 
 tbody.children[0].children[4].addEventListener('focus', () => {
-    speak('In China liggen er vandaag 116 mense in kritieke toestand')
+    speak('In China liggen er vandaag 113 mense in kritieke toestand')
 })
 
 tbody.children[0].children[5].addEventListener('focus', () => {
-    speak('In China zijn er in totaal 77738 mensen hersteld')
+    speak('In China zijn er in totaal 77816 mensen hersteld')
 })
 
 

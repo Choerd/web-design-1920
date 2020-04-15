@@ -10,16 +10,13 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var synth = window.speechSynthesis;
-console.log('Javascript is working - index.js');
-console.log(_module.test); // const body = document.querySelector('body')
-// body.addEventListener('click', () => {
-//     speak('Hi, Sjors hier!')
-// })
-
 var table = document.querySelector('table');
 var thead = table.querySelector('thead tr');
 var tbody = table.querySelector('tbody');
-console.log(tbody.children[0].children[0]);
+var intro = document.querySelector('section > p');
+intro.addEventListener('focus', function () {
+  speak('Deze website is gemaakt met een custom screen reader. Op dit moment kun je voor de optimale ervaring je screen reader uitzetten en door tabben naar de volgende sectie.');
+});
 thead.children[0].addEventListener('focus', function () {
   speak('In deze kolom vind je alle landen');
 });
@@ -42,19 +39,19 @@ tbody.children[0].children[0].addEventListener('focus', function () {
   speak('Alle volgende gegevens gaan over het land: China');
 });
 tbody.children[0].children[1].addEventListener('focus', function () {
-  speak('In China zijn er totaal 82249 besmet');
+  speak('In China zijn er totaal 82295 besmet');
 });
 tbody.children[0].children[2].addEventListener('focus', function () {
-  speak('In China zijn er totaal 3341 mensen overleden');
+  speak('In China zijn er totaal 3342 mensen overleden');
 });
 tbody.children[0].children[3].addEventListener('focus', function () {
-  speak('In China zijn er vandaag 89 nieuwe besmettingen');
+  speak('In China zijn er vandaag 46 nieuwe besmettingen');
 });
 tbody.children[0].children[4].addEventListener('focus', function () {
-  speak('In China liggen er vandaag 116 mense in kritieke toestand');
+  speak('In China liggen er vandaag 113 mense in kritieke toestand');
 });
 tbody.children[0].children[5].addEventListener('focus', function () {
-  speak('In China zijn er in totaal 77738 mensen hersteld');
+  speak('In China zijn er in totaal 77816 mensen hersteld');
 });
 
 function speak(message) {

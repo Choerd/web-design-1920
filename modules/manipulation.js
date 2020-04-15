@@ -1,8 +1,4 @@
 function reduce(data, number) {
-
-    console.log(data[0].day)
-    console.log(changeDate(data[0].day))
-
     const topTen = data.slice(0, number)
 
     topTen.forEach(entry => {
