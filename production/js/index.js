@@ -12,11 +12,11 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var synth = window.speechSynthesis;
 var table = document.querySelector('table');
 var thead = table.querySelector('thead tr');
-var tbody = table.querySelector('tbody'); // const intro = document.querySelector('section > p')
-// intro.addEventListener('focus', () => {
-//     speak('Deze website is gemaakt met een custom screen reader. Op dit moment kun je voor de optimale ervaring je screen reader uitzetten en door tabben naar de volgende sectie.')
-// })
-
+var tbody = table.querySelector('tbody');
+var intro = document.querySelector('section > p:nth-of-type(2)');
+intro.addEventListener('focus', function () {
+  speak('Laatste update sinds: 15 April 2020');
+});
 thead.children[0].addEventListener('focus', function () {
   speak('In deze kolom vind je alle landen');
 });
