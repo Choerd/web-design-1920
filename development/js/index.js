@@ -6,10 +6,10 @@ const table = document.querySelector('table')
 const thead = table.querySelector('thead tr')
 const tbody = table.querySelector('tbody')
 
-const intro = document.querySelector('section > p')
-intro.addEventListener('focus', () => {
-    speak('Deze website is gemaakt met een custom screen reader. Op dit moment kun je voor de optimale ervaring je screen reader uitzetten en door tabben naar de volgende sectie.')
-})
+// const intro = document.querySelector('section > p')
+// intro.addEventListener('focus', () => {
+//     speak('Deze website is gemaakt met een custom screen reader. Op dit moment kun je voor de optimale ervaring je screen reader uitzetten en door tabben naar de volgende sectie.')
+// })
 
 thead.children[0].addEventListener('focus', () => {
     speak('In deze kolom vind je alle landen')
