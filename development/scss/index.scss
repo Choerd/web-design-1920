@@ -8,7 +8,7 @@ html, body {
 body {
     background: $main-color;
     color: $font-color;
-    @include font($font-medium, 500, 20px);
+    @include font($font-medium, 500, 18px);
 
     section {
         padding: 50px;
@@ -17,6 +17,7 @@ body {
     section p:first-of-type {
         width: 600px;
         margin: auto;
+        text-align: center;
     }
 
     section p:nth-of-type(2) {
