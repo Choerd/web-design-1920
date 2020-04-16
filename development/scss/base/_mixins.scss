@@ -1,5 +1,3 @@
-@import './base/_variables.scss';
-
 @mixin font ($font, $weight, $size) {
     font-family: $font;
     font-weight: $weight;

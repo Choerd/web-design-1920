@@ -1,18 +1,29 @@
-const reduce = require('../modules/manipulation')
+const bodyParser = require('body-parser')
+const runAudit = require('../modules/audit')
 
 const
     express = require('express'),
-    router = express.Router(),
-    fetcher = require('../modules/data')
+    router = express.Router()
 
-router.get('/', async (req, res) => {
-    const data = await fetcher(`https://covid-193.p.rapidapi.com/statistics`)
+router.use(bodyParser.urlencoded({ extended: true }))
 
-    const topTen = reduce(data.response, 10)
+// Routes
+router.get('/', async (req, res) => res.render('index'))
 
-    res.render('index', {
-        data: topTen
-    })
+router.post('/', (req, res) => {
+    runAudit(`https://${req.body.url}`)
+        .then(data => {
+
+            console.log(data)
+
+            res.render('index', {
+                data
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
 })
 
 module.exports = router
+

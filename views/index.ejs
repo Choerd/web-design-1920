@@ -1,32 +1,18 @@
 <section>
 
-    <p tabindex="0">Deze website is gemaakt met een custom screen reader. Op dit moment kun je voor de optimale ervaring
-        je screen
-        reader uitzetten en door tabben naar de volgende sectie.</p>
+    <form action='/' method='post'>
+        <input type='text' name='url' placeholder="example.nl">
+        <input type='submit' value='Send'>
+    </form>
 
-    <p>Laatste update sinds: <%= data[0].day %></p>
-
-    <table>
-        <thead>
-            <tr>
-                <th tabindex="0">Land</th>
-                <th tabindex="0">Totaal</th>
-                <th tabindex="0">Doden</th>
-                <th tabindex="0">Nieuw</th>
-                <th tabindex="0">Kritiek</th>
-                <th tabindex="0">Herstelt</th>
-            </tr>
-        </thead>
-
-        <% data.forEach(entry => { %>
-        <tr>
-            <td tabindex="0"><%= entry.country %></td>
-            <td tabindex="0"><%= entry.cases.total %></td>
-            <td tabindex="0"><%= entry.deaths.total %></td>
-            <td tabindex="0"><%= entry.cases.new %></td>
-            <td tabindex="0"><%= entry.cases.critical %></td>
-            <td tabindex="0"><%= entry.cases.recovered %></td>
-        </tr>
+    <% if (locals.data) { %>
+    <div id="audit-data">
+        <% data.forEach(audit => { %>
+        <input type="hidden" name="<%= Object.keys(audit) %>" value="<%= Object.values(audit) %>">
         <% }) %>
-    </table>
+    </div>
+    <% } %>
+
+    <svg></svg>
+
 </section>

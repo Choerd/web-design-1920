@@ -3,56 +3,73 @@
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var _module = _interopRequireWildcard(require("./modules/module"));
+var audits = _interopRequireWildcard(require("./modules/module"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+var margin = {
+  top: 20,
+  right: 0,
+  bottom: 30,
+  left: 40
+},
+    width = 1000,
+    height = 500;
+var data = audits.get();
+var x = d3.scaleBand().domain(data.map(function (d) {
+  return d.name;
+})).range([margin.left, width - margin.right]).padding(0.2);
+var y = d3.scaleLinear().domain([0, d3.max(data, function (d) {
+  return d.value;
+})]).nice().range([height - margin.bottom, margin.top]);
+
+var xAxis = function xAxis(g) {
+  return g.attr("transform", "translate(0,".concat(height - margin.bottom, ")")).call(d3.axisBottom(x).tickSizeOuter(0));
+};
+
+var yAxis = function yAxis(g) {
+  return g.attr("transform", "translate(".concat(margin.left, ",0)")).call(d3.axisLeft(y)).call(function (g) {
+    return g.select(".domain").remove();
+  });
+};
+
+function render() {
+  var svg = d3.select("svg").attr("viewBox", [0, 0, width, height]).call(zoom);
+  svg.append("g").attr("class", "bars").attr("fill", "red").selectAll("rect").data(data).join("rect").attr("x", function (d) {
+    return x(d.name);
+  }).attr("y", function (d) {
+    return y(d.value);
+  }) // Added accessibility
+  .attr("tabindex", '0').on('focus', function (d) {
+    var message = "".concat(d.name, " heeft een waarde van ").concat(d.value);
+    speak(message);
+    console.log(d);
+  }).attr("height", function (d) {
+    return y(0) - y(d.value);
+  }).attr("width", x.bandwidth());
+  svg.append("g").attr("class", "x-axis").call(xAxis);
+  svg.append("g").attr("class", "y-axis").call(yAxis);
+}
+
+function zoom(svg) {
+  var extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
+  svg.call(d3.zoom().scaleExtent([1, 4]).translateExtent(extent).extent(extent).on("zoom", zoomed));
+
+  function zoomed() {
+    x.range([margin.left, width - margin.right].map(function (d) {
+      return d3.event.transform.applyX(d);
+    }));
+    svg.selectAll(".bars rect").attr("x", function (d) {
+      return x(d.name);
+    }).attr("width", x.bandwidth());
+    svg.selectAll(".x-axis").call(xAxis);
+  }
+}
+
+render();
 var synth = window.speechSynthesis;
-var table = document.querySelector('table');
-var thead = table.querySelector('thead tr');
-var tbody = table.querySelector('tbody');
-var intro = document.querySelector('section > p:nth-of-type(2)');
-intro.addEventListener('focus', function () {
-  speak('Laatste update sinds: 15 April 2020');
-});
-thead.children[0].addEventListener('focus', function () {
-  speak('In deze kolom vind je alle landen');
-});
-thead.children[1].addEventListener('focus', function () {
-  speak('In deze kolom vind je het totaal aantal mensen dat is besmet met het corona virus');
-});
-thead.children[2].addEventListener('focus', function () {
-  speak('In deze kolom vind je het totaal aantal mensen dat is overleden aan het corona virus');
-});
-thead.children[3].addEventListener('focus', function () {
-  speak('In deze kolom vind je de hoeveelheid nieuwe besmettingen');
-});
-thead.children[4].addEventListener('focus', function () {
-  speak('In deze kolom vind je de hoeveelheid mensen in kritieke toestand');
-});
-thead.children[5].addEventListener('focus', function () {
-  speak('In deze kolom vind je de herstelde mensen van het corona virus');
-});
-tbody.children[0].children[0].addEventListener('focus', function () {
-  speak('Alle volgende gegevens gaan over het land: China');
-});
-tbody.children[0].children[1].addEventListener('focus', function () {
-  speak('In China zijn er totaal 82295 besmet');
-});
-tbody.children[0].children[2].addEventListener('focus', function () {
-  speak('In China zijn er totaal 3342 mensen overleden');
-});
-tbody.children[0].children[3].addEventListener('focus', function () {
-  speak('In China zijn er vandaag 46 nieuwe besmettingen');
-});
-tbody.children[0].children[4].addEventListener('focus', function () {
-  speak('In China liggen er vandaag 113 mense in kritieke toestand');
-});
-tbody.children[0].children[5].addEventListener('focus', function () {
-  speak('In China zijn er in totaal 77816 mensen hersteld');
-});
 
 function speak(message) {
   synth.cancel();
@@ -67,9 +84,38 @@ function speak(message) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.test = void 0;
-var test = 'Javascript is working - modules/module.js';
-exports.test = test;
+exports.get = get;
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function get() {
+  var auditData = document.querySelector('#audit-data');
+
+  if (auditData) {
+    return getData();
+  }
+
+  function getData() {
+    var audits = _toConsumableArray(auditData.querySelectorAll('input'));
+
+    return audits.map(function (audit) {
+      return {
+        name: audit.name,
+        value: parseInt(audit.value)
+      };
+    });
+  }
+}
 
 },{}]},{},[1])
 
