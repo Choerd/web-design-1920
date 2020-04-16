@@ -1,4 +1,4 @@
-<details><summary>User Testing - Ronde 2 - Woensdag 9 april</summary>
+<details><summary>User Testing - Ronde 1 - Woensdag 9 april</summary>
 
 **Wie is Roger Ravelli**  
 `Roger Ravelli` heeft, naast dat hij adviseur duurzame energie bij de Rijksoverheid was, zijn passie voor beeldhouwen opgepakt. Door zijn teruglopende zichtvermogen wordt hij gedwongen om afscheid te nemen van een aantal van zijn passies, dit houdt hem echter niet tegen om op zoek te gaan naar nieuwe mogelijkheden. 

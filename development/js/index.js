@@ -18,7 +18,7 @@ const x = d3.scaleBand()
     .padding(0.2)
 
 const y = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.value)]).nice()
+    .domain([0, 100])
     .range([height - margin.bottom, margin.top])
 
 const xAxis = g => g
@@ -33,7 +33,6 @@ const yAxis = g => g
 function render() {
     const svg = d3.select("svg")
         .attr("viewBox", [0, 0, width, height])
-        .call(zoom)
 
     svg.append("g")
         .attr("class", "bars")
@@ -64,23 +63,10 @@ function render() {
         .call(yAxis)
 }
 
-function zoom(svg) {
-    const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]]
-
-    svg.call(d3.zoom()
-        .scaleExtent([1, 4])
-        .translateExtent(extent)
-        .extent(extent)
-        .on("zoom", zoomed))
-
-    function zoomed() {
-        x.range([margin.left, width - margin.right].map(d => d3.event.transform.applyX(d)))
-        svg.selectAll(".bars rect").attr("x", d => x(d.name)).attr("width", x.bandwidth())
-        svg.selectAll(".x-axis").call(xAxis)
-    }
+const auditData = document.querySelector('#audit-data')
+if (auditData) {
+    render()
 }
-
-render()
 
 const synth = window.speechSynthesis
 function speak(message) {

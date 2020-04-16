@@ -21,9 +21,7 @@ var data = audits.get();
 var x = d3.scaleBand().domain(data.map(function (d) {
   return d.name;
 })).range([margin.left, width - margin.right]).padding(0.2);
-var y = d3.scaleLinear().domain([0, d3.max(data, function (d) {
-  return d.value;
-})]).nice().range([height - margin.bottom, margin.top]);
+var y = d3.scaleLinear().domain([0, 100]).range([height - margin.bottom, margin.top]);
 
 var xAxis = function xAxis(g) {
   return g.attr("transform", "translate(0,".concat(height - margin.bottom, ")")).call(d3.axisBottom(x).tickSizeOuter(0));
@@ -36,7 +34,7 @@ var yAxis = function yAxis(g) {
 };
 
 function render() {
-  var svg = d3.select("svg").attr("viewBox", [0, 0, width, height]).call(zoom);
+  var svg = d3.select("svg").attr("viewBox", [0, 0, width, height]);
   svg.append("g").attr("class", "bars").attr("fill", "red").selectAll("rect").data(data).join("rect").attr("x", function (d) {
     return x(d.name);
   }).attr("y", function (d) {
@@ -53,22 +51,12 @@ function render() {
   svg.append("g").attr("class", "y-axis").call(yAxis);
 }
 
-function zoom(svg) {
-  var extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
-  svg.call(d3.zoom().scaleExtent([1, 4]).translateExtent(extent).extent(extent).on("zoom", zoomed));
+var auditData = document.querySelector('#audit-data');
 
-  function zoomed() {
-    x.range([margin.left, width - margin.right].map(function (d) {
-      return d3.event.transform.applyX(d);
-    }));
-    svg.selectAll(".bars rect").attr("x", function (d) {
-      return x(d.name);
-    }).attr("width", x.bandwidth());
-    svg.selectAll(".x-axis").call(xAxis);
-  }
+if (auditData) {
+  render();
 }
 
-render();
 var synth = window.speechSynthesis;
 
 function speak(message) {
@@ -99,22 +87,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function get() {
-  var auditData = document.querySelector('#audit-data');
+  var audits = _toConsumableArray(document.querySelectorAll('#audit-data input'));
 
-  if (auditData) {
-    return getData();
-  }
-
-  function getData() {
-    var audits = _toConsumableArray(auditData.querySelectorAll('input'));
-
-    return audits.map(function (audit) {
-      return {
-        name: audit.name,
-        value: parseInt(audit.value)
-      };
-    });
-  }
+  return audits.map(function (audit) {
+    return {
+      name: audit.name,
+      value: parseInt(audit.value)
+    };
+  });
 }
 
 },{}]},{},[1])
