@@ -13,16 +13,11 @@ router.get('/', async (req, res) => res.render('index'))
 router.post('/', (req, res) => {
     runAudit(`https://${req.body.url}`)
         .then(data => {
-
             console.log(data)
 
-            res.render('index', {
-                data
-            })
+            res.render('index', { data })
         })
-        .catch(err => {
-            console.log(err)
-        })
+        .catch(err => console.log(err))
 })
 
 module.exports = router
