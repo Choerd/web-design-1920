@@ -1,11 +1,12 @@
-const bodyParser = require('body-parser')
 const runAudit = require('../modules/audit')
 
 const
     express = require('express'),
-    router = express.Router()
+    router = express.Router(),
+    bodyParser = require('body-parser')
 
 router.use(bodyParser.urlencoded({ extended: true }))
+router.use(bodyParser.json())
 
 // Routes
 router.get('/', async (req, res) => res.render('index'))
@@ -13,12 +14,21 @@ router.get('/', async (req, res) => res.render('index'))
 router.post('/', (req, res) => {
     runAudit(`https://${req.body.url}`)
         .then(data => {
-            console.log(data)
+            const restructured = data.map(entry => {
+                return {
+                    name: Object.keys(entry)[0],
+                    value: Object.values(entry)[0]
+                }
+            })
 
-            res.render('index', { data })
+            const alldata = {
+                url: req.body.url,
+                audit: restructured
+            }
+
+            res.send(alldata)
         })
-        .catch(err => console.log(err))
+        .catch(error => console.log(error))
 })
 
 module.exports = router
-

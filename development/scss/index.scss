@@ -12,34 +12,26 @@ body {
 
     section {
         padding: 50px;
-    }
 
-    section p:first-of-type {
-        width: 600px;
-        margin: auto;
-        text-align: center;
-    }
+        form {
+            padding-bottom: 40px;
+            width: 50%;
+            display: flex;
+            margin: auto;
 
-    section p:nth-of-type(2) {
-        width: fit-content;
-        margin: 30px auto 10px auto;
-    }
-}
+            input {
+                padding: 8px 14px;
+                font-size: 16px;
+            }
 
-table {
-    border: 2px solid $base-color;
-    margin: auto;
+            input[type='text'] {
+                flex-grow: 1;
+                margin-right: 10px;
+            }
+        }
 
-    thead {
-        border-bottom: 2px solid $base-color;
-    }
-
-    td, th {
-        padding: 8px 16px;
-        border-right: 2px solid $base-color;
-    }
-
-    tr td:first-of-type {
-        text-align: right;
+        p {
+            text-align: center;
+        }
     }
 }

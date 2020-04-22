@@ -2,16 +2,10 @@
 
     <form action='/' method='post'>
         <input type='text' name='url' placeholder="example.nl">
-        <input type='submit' value='Send'>
+        <input type='submit' value='Get data'>
     </form>
 
-    <% if (locals.data) { %>
-    <div id="audit-data">
-        <% data.forEach(audit => { %>
-        <input type="hidden" name="<%= Object.keys(audit) %>" value="<%= Object.values(audit) %>">
-        <% }) %>
-    </div>
-    <% } %>
+    <p title></p>
 
     <svg></svg>
 
