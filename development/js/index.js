@@ -14,6 +14,9 @@ submit.addEventListener('click', (event) => {
     })
         .then(response => response.json())
         .then(data => {
+
+            console.log(data)
+
             createTitle(data.url)
             render(data.audit)
         })
@@ -82,7 +85,7 @@ function render(data) {
         // Interaction
         .attr("tabindex", '0')
         .on('focus', (d) => {
-            const message = `${d.name} heeft een waarde van ${d.value}`
+            const message = `${d.name} heeft een waarde van ${d.score}`
             speak(message)
             console.log(d)
         })
@@ -92,8 +95,8 @@ function render(data) {
         .merge(bars)
         .transition().duration(1000)
         .attr("x", d => x(d.name))
-        .attr("y", d => y(d.value))
-        .attr("height", d => y(0) - y(d.value))
+        .attr("y", d => y(d.score))
+        .attr("height", d => y(0) - y(d.score))
         .attr("width", x.bandwidth())
 
     used++

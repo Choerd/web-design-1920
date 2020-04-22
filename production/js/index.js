@@ -17,6 +17,7 @@ submit.addEventListener('click', function (event) {
   }).then(function (response) {
     return response.json();
   }).then(function (data) {
+    console.log(data);
     createTitle(data.url);
     render(data.audit);
   });
@@ -64,7 +65,7 @@ function render(data) {
   var bars = d3.select('.bars-container').selectAll('rect').data(data);
   bars.enter().append("rect") // Interaction
   .attr("tabindex", '0').on('focus', function (d) {
-    var message = "".concat(d.name, " heeft een waarde van ").concat(d.value);
+    var message = "".concat(d.name, " heeft een waarde van ").concat(d.score);
     speak(message);
     console.log(d);
   }) // Style
@@ -72,9 +73,9 @@ function render(data) {
   .merge(bars).transition().duration(1000).attr("x", function (d) {
     return x(d.name);
   }).attr("y", function (d) {
-    return y(d.value);
+    return y(d.score);
   }).attr("height", function (d) {
-    return y(0) - y(d.value);
+    return y(0) - y(d.score);
   }).attr("width", x.bandwidth());
   used++;
 }

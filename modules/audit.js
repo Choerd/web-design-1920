@@ -1,24 +1,29 @@
 const lighthouse = require('lighthouse')
-const chromeLauncher = require('chrome-launcher')
+const puppeteer = require('puppeteer')
 
-function runAudit(url) {
-    let audit
+async function runAudit(url) {
+    const browser = await puppeteer.launch({
+        headless: true,
+        defaultViewport: null
+    })
 
-    return chromeLauncher.launch({ chromeFlags: ['--headless', '--disable-gpu'] })
-        .then(chrome => {
-            const opts = { port: chrome.port }
-            return lighthouse(url, opts).then(data => chrome.kill().then(() => {
-                const results = data.lhr
-                const categories = results.categories
-                const criteria = Object.getOwnPropertyNames(categories)
+    const { lhr } = await lighthouse(url, {
+        port: (new URL(browser.wsEndpoint())).port,
+        output: 'json',
+        logLevel: 'info',
+    })
 
-                audit = criteria.map(crit => {
-                    return { [crit]: categories[`${crit}`].score * 100 }
-                })
+    await browser.close()
 
-                return audit
-            }))
-        })
+    const categories = Object.entries(lhr.categories)
+    const data = categories.map(category => {
+        return {
+            name: Object.entries(category)[1][1].title,
+            score: Object.entries(category)[1][1].score * 100
+        }
+    })
+
+    return data
 }
 
 module.exports = runAudit

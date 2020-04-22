@@ -14,19 +14,11 @@ router.get('/', async (req, res) => res.render('index'))
 router.post('/', (req, res) => {
     runAudit(`https://${req.body.url}`)
         .then(data => {
-            const restructured = data.map(entry => {
-                return {
-                    name: Object.keys(entry)[0],
-                    value: Object.values(entry)[0]
-                }
-            })
-
-            const alldata = {
+            data = {
                 url: req.body.url,
-                audit: restructured
+                audit: data
             }
-
-            res.send(alldata)
+            res.send(data)
         })
         .catch(error => console.log(error))
 })
