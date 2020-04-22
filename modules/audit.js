@@ -4,7 +4,8 @@ const puppeteer = require('puppeteer')
 async function runAudit(url) {
     const browser = await puppeteer.launch({
         headless: true,
-        defaultViewport: null
+        defaultViewport: null,
+        args: ['--no-sandbox']
     })
 
     const { lhr } = await lighthouse(url, {
