@@ -14,10 +14,8 @@ router.get('/', async (req, res) => res.render('index'))
 router.post('/', (req, res) => {
     runAudit(`https://${req.body.url}`)
         .then(data => {
-            data = {
-                url: req.body.url,
-                audit: data
-            }
+            data.url = req.body.url
+
             res.send(data)
         })
         .catch(error => console.log(error))
