@@ -40,6 +40,38 @@ De `context` wanneer Roger dit product gebruikt is ook heel belangrijk omdat een
 
 ## Mijn Exclusive Design
 
+De `Exclusive Design Principles`:
+* **Study Situation**
+    * Bestudeer de persoon en probeer erachter te komen hoe zij hun apparaten gebruiken en wat voor tools hem/haar helpt om deze zo makkelijk mogelijk te gebruiken.
+* **Ignore Conventions**
+    * Normaal gesproken probeer je elementen te gebruiken zodat ze herkenbaar zijn voor mensen en herkennen wat je ermee kunt, bijvoorbeeld een menubalk altijd bovenaan. Dit kan misschien totaal anders zijn voor een persoon met een beperking, kijk of je hier een betere oplossing voor kunt verzinnen en test dit natuurlijk.
+* **Prioritise Identity**
+    * Probeer samen met de persoon te ontwerpen, hierdoor kom je tot inzichten waar je zelf waarschijnlijk nooit op komt. Door jouw kennis te combineren met de persoon zijn inzichten krijg je een mooi gebalanceerd product.
+* **Add Nonsense**
+    * Wanneer de functionaliteit af is kun je het product ook leuk maken om te gebruiken. Het is natuurlijk altijd leuker wanneer je een product gebruikt dat het een fijne en leuke ervaring is.
+
+<br>
+
+**1. Study Situation**  
+Roger is niet volledig blind maar slechtziend dat betekende voor mij dat ik zowel een goed design als goede interactie moest leveren binnen mijn product. 
+
+Na de eerste testronde merkte ik eigelijk al meteen dat Roger geen mega fan is van de screenreaders. Daarom heb ik mijn eigen screenreader gemaakt die beter te controleren is. 
+
+Voor het design heb ik voor kleuren gekozen met een hoog contrast en waarvan Roger heeft gezegt dat ze fijn zijn en hij dit goed kan zien/onderscheiden.
+
+**2. Ignore Conventions**  
+Voor mijn gevoel heb ik niet echt 'conventions' gebruikt en ze ook niet echt genegeerd. Mijn tool is vrij simpel, een invulveld die opgevolgt wordt door een datavisualisatie. 
+
+De datavisualisatie was echter wel een uitdaging, deze zijn namelijk normaal gezien totaal niet geschikt voor mensen met een zichtelijke beperking omdat deze niet toegankelijk genoeg zijn. Hier is mijn focus juist wel heel erg naar toe gegaan omdat ik wilde dat Roger een datavisualisatie kon zien/horen.
+
+**3. Prioritise Identity** 
+De tool is best wel simpel en bevat niet heel veel identiteit. Tijdens de user tests heb ik wel geprobeerd om erachter te komen welke kleuren fijn zijn voor Roger zodat hij goed de datavisualisatie af kan lezen.
+
+**4. Add Nonsense**  
+In de tool moet je een website in de balk invullen. Hierna gaat hij een Lighthouse Audit doen op deze url, dit duurt best wel lang, ongeveer 5-10 seconden. In de tussentijd is er een laadbalk te zien maar vond ik het leuk om hier juist 'nonsense' toe te voegen. 
+
+Ik heb hier een liftmuziekje toegevoegd om het wachten wat leuker te maken, niemand houdt immers van wachten. 
+
 <hr>
 
 ## User Testing
