@@ -1,9 +1,5 @@
 # Web Design @cmda-minor-web 1920
 
-Introductie van het vak..
-
-<hr>
-
 ## Inhoudsopgave
 
 * [Roger Ravelli](#Roger-Ravelli)
@@ -85,12 +81,26 @@ Tijdens het bouwen van deze tool heb ik meerdere tests met Roger gedaan. Deze ku
     * Dit was de eerste test dat ik daadwerkelijk iets ging testen wat ik had gemaakt, dit vond ik eigelijk best wel spanennd. Ik had besloten om een tabel te maken omdat datavisualisaties heel lastig zijn om interactief te maken. Hij vond vooral de custom screenreader heel fijn maar wilde toch liever een datavisualisatie. Hele interessante inzichten gekregen uit deze test om door te programmeren voor de volgende test.
 
 * [User Testing - Ronde 3 - Woensdag 22 april (link)](https://github.com/Choerd/web-design-1920/wiki/User-Testing-%7C-Ronde-3-%7C-Woensdag-22-april)
-    * ..
+    * Dit was de laatste testronde om mijn tool te testen die bijna af was. Ik had de dummy-data vervangen voor echte data en een datavisualisatie gemaakt met een custom screen reader, ready to test dus! 
 
 <hr>
 
 ## Leerdoelen
 
+**Leren hoe je (design) principles in een ontwerp kan toepassen.**  
+Voor mijn tool heb ik niet heel veel naar de principles hoeven kijken, het bestaat namelijk uit een introductie en een datavisualisatie. Ik heb hier natuurlijk wel over na moeten denken maar dit heb ik voornamelijk samen met Roger gedaan door middel van de user tests en de sparsessies met Koop. 
+
+**User needs begrijpen en gebruiken in je ontwerp.**  
+Samen met Roger heb ik tijdens de user tests zoveel mogelijk informatie verzameld om voor hem een tool te ontwerpen die hij in zijn dagelijks leven kan gebruiken. De tool maakt een technische analyse van elke website die hij maar wilt. Deze wordt weergeven in een datavisualisatie die groot is zodat hij hem zelfs met zijn beperkte zicht nog goed kan zien. Ook heb ik een custom screen reader toegevoegd omdat ik merkte dat hij zijn eigen screen reader niet heel fijn vond.
+
+**Leren hoe je moet testen en de resultaten gebruiken voor het verbeteren van je ontwerp.**  
+Tijdens het testen van mijn tool ben achter heel veel dingen gekomen om mijn user tests te verbeteren. Het is vooral belangrijk dat de testpersoon hard op praat en dat er structuur is in een gesprek, vooral wanneer je met een groep gaat testen. Ook is het belangrijk om notities te maken van van de test zodat je de belangrijke dingen weer kan verwerken in het design. Ook is het erg belangrijk om de gebruiker niet te leiden door de app maar hem het te laten ontdekken. Zo kom je veel er veel beter achter of de structuur van je applicatie klopt.
+
 <hr>
 
 ## Conclusie
+Ik vond dit een heel leerzaam en leuk vak omdat dit weer eens iets anders was dan normaal, ontwerpen voor één persoon. Dit vond ik zelf heel lastig omdat ik het vet vind om een product te maken voor meerdere mensen. Uiteindelijk vind ik dat ik na 1 kennismakingsgesprek en 2 user tests er goed in ben geslaagd om een mooie, handige en vooral persoonlijke tool te maken voor mijn 'mens'. 
+
+Ik heb mijzelf ook ontwikkeld als tester omdat ik eerder altijd mijn gebruiker door mijn app heen leidde en ik dit echt geprobeerd heb minder te doen. Dit is mij niet elke keer gelukt maar ik ben mijzelf er nu wel bewust van. Door de user tests is mijn ontwerp zekerweten een stuk beter geworden dan wanneer ik deze tests niet zou hebben gedaan. Ik zou heel veel dingen over het hoofd hebben gezien zoals extra contrast, groter lettertype en het echt persoonlijk maken.
+
+Ik ben trots op mijn project omdat ik vind dat ik in 3 weken een handige tool voor Roger heb gemaakt die ik zelf ook fijn zou vinden om te gebruiken, het is een hele toegankelijke manier om een website te controleren op toengankelijkheid. Ik heb ook veel nieuwe dingen geleerd tijdens het maken van deze tool die ik niet had verwacht te leren.
