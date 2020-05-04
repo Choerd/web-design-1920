@@ -5,6 +5,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 var graph = _interopRequireWildcard(require("./modules/graph"));
 
+var utter = _interopRequireWildcard(require("./modules/speaker"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -23,7 +25,22 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var submit = document.querySelector('section form input[type="submit"]'),
     input = document.querySelector('section form input[type="text"]'),
-    loading = document.querySelector('[loading]');
+    loading = document.querySelector('[loading]'),
+    usetool = document.querySelector('#intro button'),
+    introcontainer = document.querySelector('#intro'),
+    focuscontainer = document.querySelector('#focus'),
+    audio = document.querySelector('.audio'),
+    introtext = document.querySelector('#intro-text');
+usetool.addEventListener('click', function () {
+  introcontainer.style.display = "none";
+  focuscontainer.style.display = "block";
+});
+introtext.addEventListener('focus', function (event) {
+  utter.speak(event.target.textContent);
+});
+introtext.addEventListener('blur', function () {
+  utter.stop();
+});
 submit.addEventListener('click', function (event) {
   event.preventDefault();
 
@@ -32,6 +49,7 @@ submit.addEventListener('click', function (event) {
   html.shift();
   console.log('fetching data started');
   loading.className = 'block';
+  audio.play();
   fetch('/', {
     method: 'POST',
     body: JSON.stringify({
@@ -47,6 +65,7 @@ submit.addEventListener('click', function (event) {
     graph.render(data.audits);
     info(data.accessibility);
     loading.className = 'hide';
+    audio.pause();
   });
   input.value = '';
 });
@@ -66,7 +85,7 @@ function info(data) {
 
   var div = document.createElement('div');
   div.className = 'more-info';
-  document.querySelector('section').insertAdjacentElement('beforeend', div);
+  document.querySelector('#focus').insertAdjacentElement('beforeend', div);
   array.forEach(function (string) {
     var div = document.createElement('div');
     div.textContent = string;
@@ -89,6 +108,22 @@ function appendDetails(button, data) {
   container.innerHTML = '';
   seperate.map(function (entry) {
     container.append(article(entry));
+  });
+
+  var articles = _toConsumableArray(container.children);
+
+  articles.forEach(function (article) {
+    article.addEventListener('focus', function (event) {
+      var children = event.target.children;
+      var title = children[0].textContent;
+      var text = children[1].textContent;
+      var score = children[2].textContent;
+      var message = "Title: ".concat(title, ", which means: ").concat(text, ", and has a ").concat(score);
+      utter.speak(message);
+    });
+    article.addEventListener('blur', function () {
+      utter.stop();
+    });
   });
 }
 
@@ -119,10 +154,11 @@ function article(data) {
   article.append(title);
   article.append(description);
   article.append(score);
+  article.tabIndex = 1;
   return article;
 }
 
-},{"./modules/graph":2}],2:[function(require,module,exports){
+},{"./modules/graph":2,"./modules/speaker":3}],2:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -197,13 +233,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.speak = speak;
+exports.stop = stop;
+var synth = window.speechSynthesis;
 
 function speak(message) {
-  var synth = window.speechSynthesis;
   synth.cancel();
   var utter = new SpeechSynthesisUtterance();
   utter.text = message;
+  utter.lang = 'en-US';
   synth.speak(utter);
+}
+
+function stop() {
+  synth.cancel();
 }
 
 },{}]},{},[1])

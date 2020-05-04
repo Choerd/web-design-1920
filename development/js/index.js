@@ -1,10 +1,28 @@
 import * as graph from './modules/graph'
+import * as utter from './modules/speaker'
 
 const
     submit = document.querySelector('section form input[type="submit"]'),
     input = document.querySelector('section form input[type="text"]'),
-    loading = document.querySelector('[loading]')
+    loading = document.querySelector('[loading]'),
+    usetool = document.querySelector('#intro button'),
+    introcontainer = document.querySelector('#intro'),
+    focuscontainer = document.querySelector('#focus'),
+    audio = document.querySelector('.audio'),
+    introtext = document.querySelector('#intro-text')
 
+usetool.addEventListener('click', () => {
+    introcontainer.style.display = "none"
+    focuscontainer.style.display = "block"
+})
+
+introtext.addEventListener('focus', (event) => {
+    utter.speak(event.target.textContent)
+})
+
+introtext.addEventListener('blur', () => {
+    utter.stop()
+})
 
 submit.addEventListener('click', (event) => {
     event.preventDefault()
@@ -14,6 +32,7 @@ submit.addEventListener('click', (event) => {
 
     console.log('fetching data started')
     loading.className = 'block'
+    audio.play()
 
     fetch('/', {
         method: 'POST',
@@ -28,6 +47,7 @@ submit.addEventListener('click', (event) => {
             info(data.accessibility)
 
             loading.className = 'hide'
+            audio.pause()
         })
 
     input.value = ''
@@ -49,7 +69,7 @@ function info(data) {
 
     const div = document.createElement('div')
     div.className = 'more-info'
-    document.querySelector('section').insertAdjacentElement('beforeend', div)
+    document.querySelector('#focus').insertAdjacentElement('beforeend', div)
 
     array.forEach(string => {
         const div = document.createElement('div')
@@ -78,6 +98,24 @@ function appendDetails(button, data) {
         container.append(article(entry))
     })
 
+    const articles = [...container.children]
+
+    articles.forEach(article => {
+        article.addEventListener('focus', (event) => {
+            const children = event.target.children
+            const title = children[0].textContent
+            const text = children[1].textContent
+            const score = children[2].textContent
+
+            const message = `Title: ${title}, which means: ${text}, and has a ${score}`
+
+            utter.speak(message)
+        })
+
+        article.addEventListener('blur', () => {
+            utter.stop()
+        })
+    })
 }
 
 function seperatedData(button, data) {
@@ -104,6 +142,7 @@ function article(data) {
     article.append(title)
     article.append(description)
     article.append(score)
+    article.tabIndex = 1
 
     return article
 }

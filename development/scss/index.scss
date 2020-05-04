@@ -1,17 +1,60 @@
 @import './base/_base.scss';
 @import './layout/_layout.scss';
 
-html, body {
-    // height: 100%;
-}
-
 body {
     background: $main-color;
     color: $font-color;
     @include font($font-medium, 500, 20px);
 
-    section {
+    #intro {
         margin: 50px;
+
+        p:first-of-type {
+            text-align: center;
+        }
+
+        p:first-of-type, p:nth-of-type(2) {
+            max-width: 800px;
+            margin: 0px auto 20px auto;
+        }
+
+        p:nth-of-type(3) {
+            margin: 80px auto 0px auto;
+            width: fit-content;
+        }
+
+        #intro-text:focus {
+            background-color: $base-color;
+            color: $main-color;
+        }
+
+        form {
+            width: fit-content;
+            margin: auto;
+        }
+
+        button {
+            display: block;
+            background-color: white;
+            padding: 8px 14px;
+            font-size: 16px;
+            border: none;
+            margin-top: 100px;
+            margin: 100px auto 0px auto;
+        }
+
+        form label:last-of-type {
+            margin-left: 24px;
+        }
+
+        form input {
+            margin-right: 10px;
+        }
+    }
+
+    #focus {
+        margin: 50px;
+        display: none;
 
         form {
             padding-bottom: 40px;
@@ -27,6 +70,10 @@ body {
             input[type='text'] {
                 flex-grow: 1;
                 margin-right: 10px;
+            }
+
+            input[type='submit'] {
+                background-color: white;
             }
         }
 
@@ -74,7 +121,12 @@ body {
         }
 
         .more-info article {
-            padding: 20px 0px;
+            padding: 20px 10px;
+
+            &:focus {
+                background-color: $base-color;
+                color: $main-color;
+            }
             
             p {
                 text-align: left;
